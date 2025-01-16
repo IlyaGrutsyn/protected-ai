@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIDefender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-top: 20px;
+        }
+
+        /* ФОРМА */
+        form {
+            width: 80%;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* ОБЩИЕ СТИЛИ ДЛЯ БЛОКОВ */
+        .container {
+            width: 80%;
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #4CAF50;
+            font-size: 20px;
+        }
+
+        ul {
+            list-style: disc;
+            padding-left: 20px;
+        }
+
+        p {
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        /* АДАПТИВНОСТЬ */
+        @media (max-width: 600px) {
+            form, .container {
+                width: 95%;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Введите данные для подключения</h1>
+
+    <!-- ФОРМА ВВОДА -->
+    <form action="/run_script" method="POST">
+        <label for="ip">IP адрес:</label>
+        <input type="text" id="ip" name="ip" required>
+
+        <label for="username">Имя пользователя:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Запустить</button>
+    </form>
+
+    <!-- БЛОК РЕКОМЕНДАЦИЙ -->
+    {% if recommendations %}
+    <div class="container">
+        <h2>Рекомендации от GigaChat:</h2>
+        <ul>
+            {% for recommendation in recommendations %}
+                <li>{{ recommendation }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- БЛОК РЕЗУЛЬТАТОВ -->
+    {% if messages %}
+    <div class="container">
+        <h2>Результаты:</h2>
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- БЛОК УСТАНОВЛЕННЫХ ТЕХНОЛОГИЙ -->
+    {% if installed %}
+    <div class="container">
+        <h2>Выполнены рекомендации:</h2>
+        <ul>
+            {% for tech in installed %}
+                <li>{{ tech }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- БЛОК НЕУСТАНОВЛЕННЫХ ТЕХНОЛОГИЙ -->
+    {% if failed %}
+    <div class="container">
+        <h2>Невыполнены рекомендации:</h2>
+        <ul>
+            {% for tech in failed %}
+                <li>{{ tech }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,5 @@
+Установленные технологии:
+openssl, libpam-google-authenticator, rsyslog, fail2ban, unattended-upgrades, apt
+
+Не удалось установить:
+CDN: Требуется ручная настройка
